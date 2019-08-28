@@ -12,6 +12,7 @@
         <title>Projeto_02</title>
     </head>
     <body>
+        <%@include file="WEB-INF/jspf/header.jspf" %>
         <h1>Tabela Price</h1>
     </body>
 </html>

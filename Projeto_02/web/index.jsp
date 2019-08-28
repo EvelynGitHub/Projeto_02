@@ -12,6 +12,17 @@
         <title>Projeto_02</title>
     </head>
     <body>
-        <h1>Home</h1>
+        <%@include file="WEB-INF/jspf/header.jspf" %>
+        <h1>Nome dos Integrantes do grupo</h1>
+        
+        <h2>
+            <p>Evelyn</p>
+            <p>Natalia</p>
+            <p></p>
+        </h2>
+        
+        <h1>Objetivo do Trabalho:</h1>
+        <h3>O calculo da amortização serve para ...</h3>
+        
     </body>
 </html>

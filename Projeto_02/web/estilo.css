@@ -1,0 +1,60 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27/08/2019, 22:16:08
+    Author     : evelyn
+*/
+
+div .container {
+    height: 25%;
+    background-color: blue;
+    /*background: -webkit-linear-gradient(top, #088fad 20%, #00d5ff 100%);*/
+    border: solid 2px black;
+}
+
+div .cabecalho {
+    font-size: 3vw;
+    background-color: blue;
+    text-align: center;
+    padding: 1vw;
+    position: relative;
+    /*margin: 3px;*/
+}
+
+div .esquerda {
+    /*width: 38%;*/
+    display: inline-block;
+   /* background-color: blue;*/
+    font-size: 2vw;
+    text-align: center;
+    padding: 2vw 0vw 2vw 0vw;
+    min-width:10vw;/**/
+}
+
+div.direita {
+    /*width: 38%;
+    background-color: blue;*/
+    display: inline-block;
+    margin-right: 0vw;
+    font-size: 2vw;
+    text-align: center;
+    padding: 2vw 0vw 2vw 0vw;
+    min-width:40vw;
+    float:right;
+}
+
+div a{
+    height: 100%;
+    text-decoration: none;
+    padding-right: 10px;
+    padding-left: 10px;
+    color: black;
+}
+
+div a:hover{
+    color: white;
+    background-color: black;
+}
