@@ -32,6 +32,7 @@ div .esquerda {
     text-align: center;
     padding: 2vw 0vw 2vw 0vw;
     min-width:10vw;/**/
+    max-width: 50%;
 }
 
 div.direita {
@@ -57,4 +58,8 @@ div a{
 div a:hover{
     color: white;
     background-color: black;
+}
+
+form{
+    width: 50%;
 }
