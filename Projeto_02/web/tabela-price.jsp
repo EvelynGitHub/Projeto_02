@@ -1,56 +1,101 @@
 <%-- 
     Document   : tabela-price
-    Created on : 27/08/2019, 21:55:43
-    Author     : evelyn
+    Created on : Aug 30, 2019, 12:21:29 AM
+    Author     : Pedro
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Projeto_02</title>
+        
+        <title>Tabela Price</title>
+        
     </head>
     <body>
         <%@include file="WEB-INF/jspf/header.jspf" %>
-        <h1>Tabela Price</h1>
+        <%DecimalFormat df = new DecimalFormat("#.00");%>
+        <h1 style="text-align: center">Cálculo - Tabela Price</h1
         
-        
-        <div class="container">
-            <div class="esquerda">
-                <form>
-                    Valor do emprestimo: <br> <input type="text" name="vl_divida"/> <br>
-                    Qauntidade de prestações: <br> <input type="text" name="qt_prestacao"/> <br>
-                    Valor dos Juros: <br> <input type="text" name="pc_juros" placeholder="Taxa de juros ao mês"/> <br>
-                    <input type="submit" name="tabela" value="Calcular"/>               
-                </form>
-            </div>
-            <div class="direita">
-                <%if (request.getParameter("tabela") == null) {%>
-                <h1>Por favor, preencha o formulario!</h1>
-                <%} else {
-                    Double emprestimo = Double.parseDouble(request.getParameter("vl_divida"));
-                    Double prestacao = Double.parseDouble(request.getParameter("qt_prestacao"));
-                    Double juros = Double.parseDouble(request.getParameter("pc_juros"));
-                    Double j = juros/100;
-                   /* Double amortizacao = divida ;// prestacao;
-                    Double juro = divida * juros /100;*/
-                    
-                    Double pmt = emprestimo * ((Math.pow((1+j), prestacao)*j)/(Math.pow((1+j), prestacao)-1));
-                %>
-                <h2>Valor da amortização:</h2> 
-                <h4>R$ <%=pmt%></h4>
-                <h2>Valor dos juros:</h2> 
-                <h4>R$ </h4>
-
-                <%}%>
-            </div>
+        <div style="text-align: center">
+            <form style="text-align: center">
+            Valor financiado<br><input type="number" name="v"/></br>
+            
+            <label unit="%">
+            Taxa de juros<br><input type="number" step="0.01" min="0.01" max="70.00" name="t"/></br>
+            </label>
+            
+            Número de parcelas<br><input type="number" name="n"/></br>
+            
+            <br><input type="submit" name="bt" value="Calcular"/></br>
+        </form>
+    <br><center>
         </div>
-        
-        
-        
-        
-                <%@include file="WEB-INF/jspf/footer.jspf" %>
 
+        
+        <% if(request.getParameter("bt") != null) {%>
+        
+        <%try{%>
+        <%double valor = Double.parseDouble(request.getParameter("v")); %>
+        <%double taxa = Double.parseDouble(request.getParameter("t")); %>
+        <%double tempo = Double.parseDouble(request.getParameter("n")); %>
+           
+            
+            <%double aux = Math.pow(1 + taxa / 100, tempo);%>
+            <%double prestacao = valor * (aux * taxa / 100) / (aux - 1);%>
+            
+            <table border="1"; style="text-align: center">
+                
+                <tr>
+                    <th>PARCELA</th>
+                    <th>VALOR</th>
+                    <th>JUROS</th>
+                    <th>AMORTIZAÇÃO</th>
+                    <th>SALDO DEVEDOR</th>
+                </tr>
+                <tr>
+                    <%double saldodevedor = valor;%>
+                    <td><%= 0%></td>
+                    <td><%= 0%></td>
+                    <td><%= 0%></td>
+                    <td><%= 0%></td>
+                    <td><%= (saldodevedor)%></td>
+      
+                </tr>
+                            
+            <%double juros = valor * (taxa / 100);%>
+            <%double amortizacao = prestacao - juros;%>
+            <%double devedor = valor;%>
+            
+                <%for ( int i = 1; i <= tempo; i++ ) { %>
+                
+                <%amortizacao = prestacao - juros;%>
+                <%devedor = devedor - amortizacao;%>
+                    
+                <tr>
+                    <td><%= i%></td>
+                    <td><%= df.format(prestacao)%></td>
+                    <td><%= df.format(juros)%></td>
+                    <td><%= df.format(amortizacao)%></td>
+                    <td><%= df.format(devedor)%></td>                   
+                                    
+                                      
+                </tr>
+                <%juros = devedor * ( taxa / 100);%>
+                <%}%>
+                
+  
+        <%}catch(Exception ex){%>
+        <h3 style="color: red">Erro: <%=ex.getMessage()%></h3>
+        <%}%>
+        <%}else{%>
+        <h3>Preencha o formulário</h3>
+        <%}%>
+        
+        </table>
+        <%@include file="WEB-INF/jspf/footer.jspf" %>
+    </center></br>
     </body>
 </html>
