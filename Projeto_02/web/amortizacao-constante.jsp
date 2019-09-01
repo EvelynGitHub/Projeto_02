@@ -34,19 +34,46 @@
                     Double juros = Double.parseDouble(request.getParameter("pc_juros"));
 
                     Double amortizacao = divida / prestacao;
-                    Double juro = divida * juros /100;
+                    
                 %>
-                <h2>Valor da amortização:</h2> 
-                <h4>R$ <%=amortizacao%></h4>
-                <h2>Valor dos juros:</h2> 
-                <h4>R$ <%=juro%></h4>
+                <table border="1">
+                    <tr>
+                        <th>#</th>
+                        <th>Parcelas</th>
+                        <th>Amortização</th>
+                        <th>Juros</th>
+                        <th>Saldo Devedor</th>
+                    </tr>
+                    
+                <%
+                    Double saldo = divida;
+                    for(int x = 0;x < prestacao; x++){
+                        //amotizacao +(juros * (divida - x * amortizacao))
+                        Double juro = divida * juros /100;   
+                        Double parc = amortizacao + juro;//amortizacao +(juros * (divida - x * amortizacao));
+                        saldo -= amortizacao;
+                %>          
+                    <tr>
+                        <td><%=x+1%></td>
+                        <td><%=parc%></td>
+                        <td><%=amortizacao%></td>
+                        <td><%=juro%></td>
+                        <td><%=saldo%></td>
+                    </tr>
+                           
+                
 
-                <%}%>
+                <%
+                divida -= amortizacao;
+                    }
+                }%>
+                </table>   
             </div>
         </div>
             
             
             
-            
+                <%@include file="WEB-INF/jspf/footer.jspf" %>
+
     </body>
 </html>
