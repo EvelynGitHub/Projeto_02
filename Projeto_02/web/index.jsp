@@ -24,5 +24,11 @@
         <h1>Objetivo do Trabalho:</h1>
         <h3>O calculo da amortização serve para ...</h3>
         
+        
+        
+        
+        
+        
+        <%@include file="WEB-INF/jspf/footer.jspf" %>        
     </body>
 </html>
